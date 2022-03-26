@@ -1,0 +1,3 @@
+simply reading online about file descriptors does the job, we want the program to read from stdin (uz)
+so we want int(argv[1])-0x1234 = fd(stdin) = 0
+

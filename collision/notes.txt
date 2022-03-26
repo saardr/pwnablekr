@@ -1,0 +1,5 @@
+the program reads 20 chars from argv 4 at a time and treats those 4 it read as int
+it sums the 5 ints and compares to the constant coded in it.
+
+create 5 integers that sum to said value (this is beyond trivial)
+simply use struct.pack or pwntools.p32 to create a string made from said 5 ints

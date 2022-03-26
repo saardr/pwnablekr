@@ -1,0 +1,37 @@
+AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXXYYYYZZZZ
+
+1) padding = AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXX
+2) overwrite_addr = (0x804a004)
+3) jmp_addr = p32(0x80485D7)
+
+
+we notice that instead of using &passcode, the program is using passcode1
+meaning the value in passcode1 will be treated as an address.
+but what value does passcode have? when we disassemble the program we can tell passcode1
+will be located on the stack, therefore whatever value was placed there before the function login will be used.
+
+if we think carefully, we notice the function welcome gets called first, not only that, it also reads information!
+that means the name it has read is going to be stored on the stack. when welcome exits, the information
+on the stack isn't deleted, but merely the esp register is moved around.
+therefore when we call login, the name we inputted is still on the stack!
+we can pinpoint what 4 bytes of name will use the same stack address as passcode1 in one of 2 ways:
+a) we can just outright disassemble and re the program, this is fine but takes effort
+b) we use the classic AAAABBBBCCCC... etc and see what hex value we get while debugging with gdb.
+the hex value we get is YYYY. that makes sense since that is exactly the last 4 bytes in the name.
+
+that means we control the address in passcode1. unfortunately passcode2 is beyond our reach (we would need 104 bytes for that),
+so we can't overwrite passcode2.
+that means we can't beat the check and need to avoid it all together.
+
+since we control passcode1, we can basically overwrite any 4 bytes we would like in the code.
+however, since the system has aslr, we can't overwrite values on the stack since the stack addresses change.
+
+we can however overwrite code in the .text segment or overwrite addresses in the .plt
+
+we see we make a call to fflush in the plt following the call to scanf, this looks promising.
+
+we overwrite the plt address of fflush and point it instead to code in case the if check passes.
+this is quite easy to tell using any decent disassembler, the address we want to jump to is 0x080485D7
+
+we can do the rest similarly to how liveoverflow does it in this video: https://youtu.be/t1LH9D5cuK4?t=155
+explanation on the plt and how all of that works can also be found in his videos or online.

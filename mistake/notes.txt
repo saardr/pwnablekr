@@ -1,0 +1,2 @@
+it xors the string with 1
+

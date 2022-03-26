@@ -1,0 +1,4 @@
+simply strings the file.
+we see a upx description, after googling we find it is a packing software.
+
+we install upx, and unpack the binary. once unpacked, simply open in ida and we are done.

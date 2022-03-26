@@ -1,0 +1,4 @@
+we see the notorious gets used in the program.
+we know we need to bof to exactly allign 0xcafebabe
+we can both use a disassembler or the AAAABBBBCCCC... padding to find out how to do it precisely, i use ida.
+also, we need to pack 0xcafebabe into a string, but for that we can use struct
