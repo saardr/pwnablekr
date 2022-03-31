@@ -1,0 +1,4 @@
+we can just use "/bin/cat /home/cmd1/f*"
+to avoid using the keyword "flag" which is filtered
+
+PASSWORD:mommy now I get what PATH environment is for :)

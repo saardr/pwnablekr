@@ -1,0 +1,5 @@
+since there 2 for loops, for every number in the lotto array
+every number in the submit array is tested. we just need a score of 6.
+hence if we put the same number in the range 1-45 6 times in the input.
+we have a chance of 1-(44/45)^6 to succeed, which is fairly decent.
+then we just keep playing until we win.
